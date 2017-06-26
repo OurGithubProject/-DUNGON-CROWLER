@@ -1,0 +1,37 @@
+import random, time
+
+class Player(object):
+    player_deffensive = 150
+
+
+class Enemy(Player):
+    """Klasa tworząca przeciwników"""
+    def __init__(self, monster_hp, monster_dmg, monster_name):
+        self.monster_hp = monster_hp
+        self.monster_dmg = monster_dmg
+        self.monster_name = monster_name
+
+    def basicAttack(self):
+
+        print("\t\tAtakuje cię", self.monster_name)
+        while True:
+            critical_chance = random.randint(1, 5)
+            time.sleep(2)
+
+            if critical_chance == 5:
+                self.player_deffensive = self.player_deffensive - self.monster_dmg*2
+                print(" Przeciwnik trafia krytycznie i zadaje ci:", self.monster_dmg*2,"pkt obrażeń")
+            else:
+                self.player_deffensive = self.player_deffensive - self.monster_dmg
+                print(" Atak tego przeciwnika zadaje ci:", self.monster_dmg, "obrażeń")
+
+            print("Twoje zdrowie wynosi obecnie:", self.player_deffensive, "pkt życia")
+
+            if self.player_deffensive <= 0 or self.monster_hp <= 0:
+                print("\t\tJESTEŚ MARTWY")
+                break
+
+
+witch = Enemy(100, 30, "Ghul") #TODO dodać klasę/listy ze statystykami przypisanymi do konkretnych przeciwników i zmienić język na angieski
+witch.basicAttack()
+
